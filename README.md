@@ -9,12 +9,12 @@ Created a standard database with:
 
 ---
 
-Setup the project [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup.md)
+**Setup the project** [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup.md)
 
 
 ---
 
-# Table explanation
+# Tables explanation
 
 ## Autores:
 - standard table with information about the authors
