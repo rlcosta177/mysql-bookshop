@@ -2,20 +2,12 @@
 
 ## Table of Contents
 
-  1.Schema Overview
-    2.Tables
-        autores
-        categorias
-        itens_venda
-        livros
-        clientes
-        posicao
-        funcionarios
-        vendas
-        livros_and_autores
-    3.Triggers
-    4.Stored Procedures
-    5.Cursor
+1. First item
+2. Second item
+3. Third item
+  1. Indented item
+  2. Indented item
+4. Fourth item 
 ---
 
 # Schema Overview
