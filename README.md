@@ -353,3 +353,88 @@ This stored procedure calculates the total sales for a specified period.
          CALL TVPT1('2015-1-1', '2025-1-1');
          ~~~
        - **Explanation**: Calculates the total sales amount for the period from January 1, 2015, to January 1, 2025.
+
+
+---
+
+## Cursor
+
+### Procedure: ListBooksSoldInPeriod
+
+This stored procedure lists books sold within a specified period using a cursor.
+
+   - **Procedure Name**: ListBooksSoldInPeriod
+   - **Parameters**:
+       - startDate (DATETIME): The start date of the period.
+       - endDate (DATETIME): The end date of the period.
+   - **Purpose**:
+       - Retrieves and outputs the ID, title, and total quantity sold of books within the specified date range.
+   - **Behavior**:
+       - The procedure selects the books sold between the provided dates, using joins to gather relevant data.
+       - A cursor is used to iterate through the result set and output the ID, title, and total quantity sold for each book.
+   - **Code**:
+     ~~~~sql
+     DROP PROCEDURE IF EXISTS ListBooksSoldInPeriod;
+
+     DELIMITER //
+     CREATE PROCEDURE ListBooksSoldInPeriod(IN startDate DATETIME, IN endDate DATETIME)
+     BEGIN
+       DECLARE done INT DEFAULT FALSE;
+       DECLARE book_id INT;
+       DECLARE book_title VARCHAR(45);
+       DECLARE total_sold INT;
+       DECLARE book_cursor CURSOR FOR
+         SELECT l.id, l.titulo, SUM(iv.quantidade) AS total_sold
+         FROM book_shop.livros l
+         LEFT JOIN book_shop.itens_venda iv ON l.id = iv.livros_id
+         LEFT JOIN book_shop.vendas v ON iv.vendas_id = v.id
+         WHERE v.data_venda BETWEEN startDate AND endDate
+         GROUP BY l.id, l.titulo;
+      
+       DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+       OPEN book_cursor;
+    
+       read_loop: LOOP
+         FETCH book_cursor INTO book_id, book_title, total_sold;
+         IF done THEN
+           LEAVE read_loop;
+         END IF;
+         SELECT book_id, book_title, total_sold;
+       END LOOP;
+    
+       CLOSE book_cursor;
+     END //
+     DELIMITER ;
+     ~~~~
+
+     ### Explanation
+
+         Declaring Variables and Cursor:
+            done (INT): A flag to indicate when the cursor has reached the end of the result set.
+            book_id (INT): The ID of the book.
+            book_title (VARCHAR(45)): The title of the book.
+            total_sold (INT): The total quantity of the book sold within the specified period.
+            book_cursor: The cursor that selects book details and total quantity sold from the livros, itens_venda, and vendas tables, grouped by book ID and title.
+
+     **Cursor Operations**:
+            **OPEN**: Opens the book_cursor to start fetching rows.
+            **FETCH**: Fetches the next row from the book_cursor into the declared variables (book_id, book_title, total_sold).
+            **LOOP**: Repeatedly fetches rows until the cursor reaches the end.
+            **SELECT**: Outputs the fetched details (book ID, title, total quantity sold).
+            **CLOSE**: Closes the cursor after all rows have been processed.
+
+      **Error Handling**:
+            A CONTINUE HANDLER is declared to set the done flag to TRUE when the end of the cursor result set is reached.
+
+     ### Usage Example
+
+        **Call Example**:
+        ~~~~sql
+        CALL ListBooksSoldInPeriod('2010-01-01', '2024-12-31');
+        ~~~~
+
+        **Explanation**:
+        ~~~~sql
+        This call retrieves and outputs the ID, title, and total quantity sold of books within the date range from January 1, 2010, to December 31, 2024.
+        ~~~~
