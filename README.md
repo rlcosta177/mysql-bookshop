@@ -150,3 +150,21 @@ This trigger updates the stock of a book after a sale.
    - **Purpose**: To update the 'quantidade_em_stock' of a book in the livros table by subtracting the quantity sold from the current stock.
    - **Behavior**:
        - After a new record is inserted into the itens_venda table, the quantidade_em_stock in the livros table is decreased by the quantity sold.
+   - **Code:**
+     ```bash
+     DROP TRIGGER IF EXISTS stock_update_after_insert;
+
+     DELIMITER $$
+
+     CREATE TRIGGER book_stock_after_insert
+     AFTER INSERT ON itens_venda
+     FOR EACH ROW
+     BEGIN
+         -- Update book stock --
+         UPDATE livros 
+         SET quantidade_em_stock = quantidade_em_stock - NEW.quantidade
+         WHERE id = NEW.livros_id;
+     END$$
+
+     DELIMITER ;
+     ```
