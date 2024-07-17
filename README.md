@@ -14,7 +14,7 @@
     8. [vendas](#vendas)
     9. [livros_and_autores](#livros_and_autores)
 4. [Triggers](#Triggers)
-5. [Stored Procedures](#Procedures)
+5. [Stored Procedures](#Stored-Procedure)
 6. [Cursor](#Cursor)
 
 ---
