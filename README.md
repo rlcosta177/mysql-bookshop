@@ -151,7 +151,7 @@ This trigger updates the stock of a book after a sale.
    - **Behavior**:
        - After a new record is inserted into the itens_venda table, the quantidade_em_stock in the livros table is decreased by the quantity sold.
    - **Code:**
-     ```bash
+     ~~~sql
      DROP TRIGGER IF EXISTS stock_update_after_insert;
 
      DELIMITER $$
@@ -167,4 +167,4 @@ This trigger updates the stock of a book after a sale.
      END$$
 
      DELIMITER ;
-     ```
+     ~~~
