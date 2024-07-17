@@ -28,9 +28,9 @@ The book_shop schema is designed to manage a book store's data, including inform
 
 ---
 
-### Tables
+## Tables
 
-#### autores
+### autores
 
 Stores information about authors.
 
@@ -39,7 +39,7 @@ Stores information about authors.
        - nome (VARCHAR(45), NOT NULL): Name of the author.
        - biografia (TINYTEXT): Short biography of the author.
 
-#### categorias
+### categorias
 
 Stores information about book categories.
 
@@ -47,7 +47,7 @@ Stores information about book categories.
        - id (INT, Primary Key, Auto Increment): Unique identifier for each category.
        - nome (VARCHAR(45), NOT NULL): Name of the category.
 
-#### itens_venda
+### itens_venda
 
 Stores information about items in sales transactions.
 
@@ -63,7 +63,7 @@ Stores information about items in sales transactions.
        - fk_itens_venda_livros1_idx on livros_id
        - fk_itens_venda_vendas1_idx on vendas_id, vendas_funcionarios_id, vendas_clientes_id
 
-#### livros
+### livros
 
 Stores information about books.
 
@@ -77,7 +77,7 @@ Stores information about books.
    - **Indexes**:
        - fk_livros_categorias1_idx on categorias_id
 
-#### clientes
+### clientes
 
 Stores information about customers.
 
@@ -87,7 +87,7 @@ Stores information about customers.
        - email (VARCHAR(45), NOT NULL): Email of the customer.
        - telefone (INT): Phone number of the customer.
 
-#### posicao
+### posicao
 
 Stores information about employee positions.
 
@@ -95,7 +95,7 @@ Stores information about employee positions.
        - id (INT, Primary Key, Auto Increment): Unique identifier for each position.
        - nome (VARCHAR(45), NOT NULL): Name of the position.
 
-#### funcionarios
+### funcionarios
 
 Stores information about employees.
 
@@ -108,7 +108,7 @@ Stores information about employees.
    - **Indexes**:
        - fk_funcionarios_posicao1_idx on posicao_id
 
-#### vendas
+### vendas
 
 Stores information about sales transactions.
 
@@ -122,7 +122,7 @@ Stores information about sales transactions.
        - fk_vendas_funcionarios1_idx on funcionarios_id
        - fk_vendas_clientes1_idx on clientes_id
 
-#### livros_and_autores
+### livros_and_autores
 
 Stores the relationship between books and authors.
 
