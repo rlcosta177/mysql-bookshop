@@ -2,12 +2,21 @@
 
 ## Table of Contents
 
-1. First item
-2. Second item
-3. Third item
-  1. Indented item
-  2. Indented item
-4. Fourth item 
+1. Schema Overview
+2. Tables
+    1. [autores](#autores)
+    2. categorias
+    3. itens_venda
+    4. livros
+    5. clientes
+    6. posicao
+    7. funcionarios
+    8. vendas
+    9. livros_and_autores
+4. Triggers
+5. Stored Procedures
+6. Cursor
+
 ---
 
 # Schema Overview
