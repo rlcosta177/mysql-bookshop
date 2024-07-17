@@ -206,3 +206,150 @@ This trigger prevents the insertion of a sale if there is not enough stock.
 
      DELIMITER ;
      ~~~
+
+---
+
+# Stored Procedures
+
+## Stored Procedures Documentation
+### RNV1 (Registar uma nova venda)
+
+This stored procedure registers a new sale in the database.
+
+   - **Procedure Name**: RNV1
+   - **Parameters**:
+       - _DataVenda (DATETIME): The date and time of the sale.
+       - _FuncionarioID (INT): The ID of the employee handling the sale.
+       - _ClienteID (INT): The ID of the customer making the purchase.
+       - _Quantidade (INT): The quantity of the book being sold.
+       - _LivroID (INT): The ID of the book being sold.
+   - **Purpose**:
+       - Inserts a new record into the vendas table with the sale details.
+       - Inserts a new record into the itens_venda table with the item details of the sale.
+   - **Behavior**:
+       - A new sale is recorded in the vendas table.
+       - The procedure retrieves the last inserted ID from the vendas table.
+       - The procedure then inserts a new record into the itens_venda table using the retrieved ID along with other provided details.
+   - **Code**:
+     ~~~sql
+     DROP PROCEDURE IF EXISTS RNV1;
+     DELIMITER $$
+    
+     CREATE PROCEDURE `book_shop`.`RNV1` (
+       IN _DataVenda DATETIME,
+       IN _FuncionarioID INT,
+       IN _ClienteID INT,
+       IN _Quantidade INT,
+       IN _LivroID INT
+     )
+     BEGIN
+       DECLARE _VendaID INT;
+    
+       -- Insert a new record into the 'vendas' table
+       INSERT INTO `book_shop`.`vendas` (data_venda, funcionarios_id, clientes_id)
+       VALUES (_DataVenda, _FuncionarioID, _ClienteID);
+    
+       -- Get the last inserted id for the 'vendas' table
+       SET _VendaID = LAST_INSERT_ID();
+    
+       -- Insert a new record into the 'itens_venda' table
+       INSERT INTO `book_shop`.`itens_venda` (quantidade, livros_id, vendas_id, vendas_funcionarios_id, vendas_clientes_id)
+       VALUES (_Quantidade, _LivroID, _VendaID, _FuncionarioID, _ClienteID);
+    
+     END $$
+     DELIMITER ;
+     ~~~
+
+### ADC1 (Atualizar os dados de um cliente)
+
+This stored procedure updates the details of a customer.
+
+   - **Procedure Name**: ADC1
+   - **Parameters**:
+       - _ID (INT): The ID of the customer to update.
+       - _Nome (VARCHAR(45)): The new name of the customer.
+       - _Email (VARCHAR(45)): The new email of the customer.
+       - _Telefone (INT): The new phone number of the customer.
+   - **Purpose**:
+       - Updates the customer details in the clientes table.
+   - **Behavior**:
+       - The procedure updates the name, email, and phone number of the customer with the specified ID in the clientes table.
+   - **Code**:
+     ~~~sql
+     DROP PROCEDURE IF EXISTS ADC1;
+    
+     DELIMITER //
+     CREATE PROCEDURE `ADC1`(
+         IN _ID INT,
+         IN _Nome VARCHAR(45),
+         IN _Email VARCHAR(45),
+         IN _Telefone INT
+     )
+     BEGIN
+         UPDATE `book_shop`.`clientes`
+         SET
+             `nome` = _Nome,
+             `email` = _Email,
+             `telefone` = _Telefone
+         WHERE
+             `id` = _ID;
+     END //
+     DELIMITER ;
+     ~~~
+
+### TVPT1 (Calcular o total de vendas de um determinado período)
+
+This stored procedure calculates the total sales for a specified period.
+
+   - **Procedure Name**: TVPT1
+   - **Parameters**:
+       - _Data1 (DATETIME): The start date of the period.
+       - _Data2 (DATETIME): The end date of the period.
+   - **Purpose**:
+       - Calculates the total sales amount for the given period.
+   - **Behavior**:
+       - The procedure calculates the total sales by summing up the product of the quantity and price of the books sold between the specified dates.
+   - **Code**:
+     ~~~sql
+     DROP PROCEDURE IF EXISTS TVPT1;
+
+     DELIMITER //
+     CREATE PROCEDURE `TVPT1`(
+         IN _Data1 DATETIME,
+         IN _Data2 DATETIME
+     )
+     BEGIN
+         SELECT SUM(iv.quantidade * l.preco) AS `Total de Vendas` 
+         FROM itens_venda iv
+         JOIN livros l ON iv.livros_id = l.id
+         JOIN vendas v ON iv.vendas_id = v.id
+         WHERE v.data_venda BETWEEN _Data1 AND _Data2;
+     END //
+     DELIMITER ;
+     ~~~
+
+### Usage Examples
+
+   - Register a New Sale (RNV1)
+       - **Call Example**:
+         ~~~sql
+         CALL book_shop.RNV1('2024-07-16 12:00:00', 1, 1, 2, 1);
+         ~~~
+       - **Explanation**: Registers a sale made on '2024-07-16 12:00:00' by employee with ID 1, to customer with ID 1, for 2 copies of the book with ID 1.
+
+   - Update Customer Details (ADC1)
+
+       - **Call Example**:
+         ~~~sql
+         CALL ADC1(1, 'John Doe', 'john.doe@example.com', 1234567890);
+         ~~~
+
+       - **Explanation**: Updates the customer with ID 1 to have the name 'John Doe', email 'john.doe@example.com', and phone number 1234567890.
+
+   - Calculate Total Sales (TVPT1)
+
+       - **Call Example**:
+         ~~~sql
+         CALL TVPT1('2015-1-1', '2025-1-1');
+         ~~~
+       - **Explanation**: Calculates the total sales amount for the period from January 1, 2015, to January 1, 2025.
