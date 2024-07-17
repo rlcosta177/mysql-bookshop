@@ -168,3 +168,41 @@ This trigger updates the stock of a book after a sale.
 
      DELIMITER ;
      ~~~
+
+### Trigger: check_stock_before_insert
+
+This trigger prevents the insertion of a sale if there is not enough stock.
+
+   - **Trigger Name**: 'check_stock_before_insert'
+   - **Timing**: BEFORE INSERT
+   - **Event**: INSERT on 'itens_venda'
+   - **Purpose**: To ensure there is enough stock of a book before allowing the insertion of a new sale record.
+   - **Behavior**:
+       - Before a new record is inserted into the itens_venda table, the trigger checks if the quantity of the book being sold is available in stock.
+       - If the requested quantity is greater than the available stock, an error is raised and the insertion is prevented.
+   - **Code**:
+     ~~~sql
+     DROP TRIGGER IF EXISTS check_stock_before_insert;
+
+     DELIMITER $$
+
+     CREATE TRIGGER check_stock_before_insert
+     BEFORE INSERT ON itens_venda
+     FOR EACH ROW
+     BEGIN
+         DECLARE available_stock INT;
+    
+         -- Verificar o stock disponível --
+         SELECT quantidade_em_stock INTO available_stock
+         FROM livros
+         WHERE id = NEW.livros_id;
+    
+         -- Check book stock --
+         IF NEW.quantidade > available_stock THEN
+            SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = 'Não há stock suficiente para realizar a venda';
+         END IF;
+     END$$
+
+     DELIMITER ;
+     ~~~
