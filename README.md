@@ -2,20 +2,20 @@
 
 ## Table of Contents
 
-1. Schema Overview
-2. Tables
+1. [Schema Overview](#Schema)
+2. [Tables](#Tables)
     1. [autores](#autores)
-    2. categorias
-    3. itens_venda
-    4. livros
-    5. clientes
-    6. posicao
-    7. funcionarios
-    8. vendas
-    9. livros_and_autores
-4. Triggers
-5. Stored Procedures
-6. Cursor
+    2. [categorias](#categorias)
+    3. [itens_venda](#itens_venda)
+    4. [livros](#livros)
+    5. [clientes](#clientes)
+    6. [posicao](#posicao)
+    7. [funcionarios](#funcionarios)
+    8. [vendas](#vendas)
+    9. [livros_and_autores](#livros_and_autores)
+4. [Triggers](#Triggers)
+5. [Stored Procedures](#Procedures)
+6. [Cursor](#Cursor)
 
 ---
 
@@ -25,6 +25,7 @@ The book_shop schema is designed to manage a book store's data, including inform
 ---
 
 ### Tables
+
 #### autores
 
 Stores information about authors.
