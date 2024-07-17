@@ -7,6 +7,10 @@ Created a standard database with:
 - procedures
 - cursors
 
+---
+
+Setup the project [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup.md)
+
 
 ---
 
