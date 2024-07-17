@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-1. [Schema Overview](#Schema)
+1. [Schema Overview](#schema-overview)
 2. [Tables](#Tables)
     1. [autores](#autores)
     2. [categorias](#categorias)
