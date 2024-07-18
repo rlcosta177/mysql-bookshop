@@ -53,9 +53,9 @@ INSERT INTO `book_shop`.`itens_venda` (`quantidade`,`livros_id`,`vendas_id`,`ven
 (20,3,3,3,3),
 (15,4,4,4,1),
 (39,1,5,4,2),
-(200,1,5,4,2);
+(20,1,5,4,2);
 
-
+SELECT * FROM livros;
 INSERT INTO `book_shop`.`livros_and_autores` (`livros_id`,`livros_categorias_id`,`autores_id`) VALUES
 (1,1,1),
 (2,1,2),
