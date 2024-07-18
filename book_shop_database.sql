@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `book_shop`.`autores` (
 
 
 -- -----------------------------------------------------
-				### categorias Table ###
+				### categorias table ###
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `book_shop`.`categorias` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `book_shop`.`clientes` (
   );
   
   
-  -- -----------------------------------------------------
+-- -----------------------------------------------------
 				### posicao table ###
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `book_shop`.`posicao` (
