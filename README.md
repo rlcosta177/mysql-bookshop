@@ -407,11 +407,11 @@ This stored procedure lists books sold within a specified period using a cursor.
      ### Explanation
 
         - Declaring Variables and Cursor:
-           - done (INT): A flag to indicate when the cursor has reached the end of the result set.
-           - book_id (INT): The ID of the book.
-           - book_title (VARCHAR(45)): The title of the book.
-           - total_sold (INT): The total quantity of the book sold within the specified period.
-           - book_cursor: The cursor that selects book details and total quantity sold from the livros, itens_venda, and vendas tables, grouped by book ID and title.
+           - `done` (INT): A flag to indicate when the cursor has reached the end of the result set.
+           - `book_id` (INT): The ID of the book.
+           - `book_title` (VARCHAR(45)): The title of the book.
+           - `total_sold` (INT): The total quantity of the book sold within the specified period.
+           - `book_cursor`: The cursor that selects book details and total quantity sold from the livros, itens_venda, and vendas tables, grouped by book ID and title.
 
      **Cursor Operations**:
             **OPEN**: Opens the book_cursor to start fetching rows.
