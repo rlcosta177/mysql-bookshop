@@ -1,7 +1,8 @@
 -- ------------------------------ 7.CRUSORES ------------------------------ --
 
-DELIMITER //
+DROP PROCEDURE IF EXISTS ListBooksSoldInPeriod;
 
+DELIMITER //
 CREATE PROCEDURE ListBooksSoldInPeriod(IN startDate DATETIME, IN endDate DATETIME)
 BEGIN
   DECLARE done INT DEFAULT FALSE;
@@ -9,7 +10,7 @@ BEGIN
   DECLARE book_title VARCHAR(45);
   DECLARE total_sold INT;
   DECLARE book_cursor CURSOR FOR
-    SELECT l.id, l.titulo, COALESCE(SUM(iv.quantidade), 0) AS total_sold
+    SELECT l.id, l.titulo, SUM(iv.quantidade) AS total_sold
     FROM book_shop.livros l
     LEFT JOIN book_shop.itens_venda iv ON l.id = iv.livros_id
     LEFT JOIN book_shop.vendas v ON iv.vendas_id = v.id
@@ -30,8 +31,7 @@ BEGIN
 
   CLOSE book_cursor;
 END //
-
 DELIMITER ;
 
 
-CALL ListBooksSoldInPeriod('2015-01-01 00:00:00', '2024-12-31 23:59:59');
+CALL ListBooksSoldInPeriod('2010-01-01', '2024-12-31');
