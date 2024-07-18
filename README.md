@@ -25,6 +25,7 @@
 
 # Schema Overview
 The book_shop schema is designed to manage a book store's data, including information about books, authors, categories, customers, employees, and sales transactions.
+![Screenshot from 2024-07-18 08-55-09](https://github.com/user-attachments/assets/5a98e557-c722-48c5-b337-b11e96019d45)
 
 ---
 
