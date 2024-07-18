@@ -36,29 +36,29 @@ The book_shop schema is designed to manage a book store's data, including inform
 Stores information about authors.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each author.
-       - nome (VARCHAR(45), NOT NULL): Name of the author.
-       - biografia (TINYTEXT): Short biography of the author.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each author.
+       - `nome` (VARCHAR(45), NOT NULL): Name of the author.
+       - `biografia` (TINYTEXT): Short biography of the author.
 
 ### categorias
 
 Stores information about book categories.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each category.
-       - nome (VARCHAR(45), NOT NULL): Name of the category.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each category.
+       - `nome` (VARCHAR(45), NOT NULL): Name of the category.
 
 ### itens_venda
 
 Stores information about items in sales transactions.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each item in a sale.
-       - quantidade (INT): Quantity of the item sold.
-       - livros_id (INT, Foreign Key): Reference to the livros table.
-       - vendas_id (INT, Foreign Key): Reference to the vendas table.
-       - vendas_funcionarios_id (INT, Foreign Key): Reference to the funcionarios table.
-       - vendas_clientes_id (INT, Foreign Key): Reference to the clientes table.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each item in a sale.
+       - `quantidade` (INT): Quantity of the item sold.
+       - `livros_id` (INT, Foreign Key): Reference to the livros table.
+       - `vendas_id` (INT, Foreign Key): Reference to the vendas table.
+       - `vendas_funcionarios_id` (INT, Foreign Key): Reference to the funcionarios table.
+       - `vendas_clientes_id` (INT, Foreign Key): Reference to the clientes table.
 
    - **Indexes**:
        - fk_itens_venda_livros1_idx on livros_id
@@ -69,11 +69,11 @@ Stores information about items in sales transactions.
 Stores information about books.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each book.
-       - titulo (VARCHAR(45), NOT NULL): Title of the book.
-       - preco (DECIMAL(10,2)): Price of the book.
-       - quantidade_em_stock (INT): Quantity in stock.
-       - categorias_id (INT, Foreign Key): Reference to the categorias table.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each book.
+       - `titulo` (VARCHAR(45), NOT NULL): Title of the book.
+       - `preco` (DECIMAL(10,2)): Price of the book.
+       - `quantidade_em_stock` (INT): Quantity in stock.
+       - `categorias_id` (INT, Foreign Key): Reference to the categorias table.
 
    - **Indexes**:
        - fk_livros_categorias1_idx on categorias_id
@@ -83,28 +83,28 @@ Stores information about books.
 Stores information about customers.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each customer.
-       - nome (VARCHAR(45), NOT NULL): Name of the customer.
-       - email (VARCHAR(45), NOT NULL): Email of the customer.
-       - telefone (INT): Phone number of the customer.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each customer.
+       - `nome` (VARCHAR(45), NOT NULL): Name of the customer.
+       - `email` (VARCHAR(45), NOT NULL): Email of the customer.
+       - `telefone` (INT): Phone number of the customer.
 
 ### posicao
 
 Stores information about employee positions.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each position.
-       - nome (VARCHAR(45), NOT NULL): Name of the position.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each position.
+       - `nome` (VARCHAR(45), NOT NULL): Name of the position.
 
 ### funcionarios
 
 Stores information about employees.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each employee.
-       - nome (VARCHAR(45), NOT NULL): Name of the employee.
-       - salario (FLOAT): Salary of the employee.
-       - posicao_id (INT, Foreign Key): Reference to the posicao table.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each employee.
+       - `nome` (VARCHAR(45), NOT NULL): Name of the employee.
+       - `salario` (FLOAT): Salary of the employee.
+       - `posicao_id` (INT, Foreign Key): Reference to the posicao table.
 
    - **Indexes**:
        - fk_funcionarios_posicao1_idx on posicao_id
@@ -114,10 +114,10 @@ Stores information about employees.
 Stores information about sales transactions.
 
    - **Columns**:
-       - id (INT, Primary Key, Auto Increment): Unique identifier for each sale.
-       - data_venda (DATETIME): Date and time of the sale.
-       - funcionarios_id (INT, Foreign Key): Reference to the funcionarios table.
-       - clientes_id (INT, Foreign Key): Reference to the clientes table.
+       - `id` (INT, Primary Key, Auto Increment): Unique identifier for each sale.
+       - `data_venda` (DATETIME): Date and time of the sale.
+       - `funcionarios_id` (INT, Foreign Key): Reference to the funcionarios table.
+       - `clientes_id` (INT, Foreign Key): Reference to the clientes table.
 
    - **Indexes**:
        - fk_vendas_funcionarios1_idx on funcionarios_id
@@ -128,9 +128,9 @@ Stores information about sales transactions.
 Stores the relationship between books and authors.
 
    - **Columns**:
-       - livros_id (INT, Primary Key, Foreign Key): Reference to the livros table.
-       - livros_categorias_id (INT, Primary Key, Foreign Key): Reference to the categorias table.
-       - autores_id (INT, Primary Key, Foreign Key): Reference to the autores table.
+       - `livros_id` (INT, Primary Key, Foreign Key): Reference to the livros table.
+       - `livros_categorias_id` (INT, Primary Key, Foreign Key): Reference to the categorias table.
+       - `autores_id` (INT, Primary Key, Foreign Key): Reference to the autores table.
 
    - **Indexes**:
        - fk_livros_and_autores_autores1_idx on autores_id
@@ -219,11 +219,11 @@ This stored procedure registers a new sale in the database.
 
    - **Procedure Name**: RNV1
    - **Parameters**:
-       - _DataVenda (DATETIME): The date and time of the sale.
-       - _FuncionarioID (INT): The ID of the employee handling the sale.
-       - _ClienteID (INT): The ID of the customer making the purchase.
-       - _Quantidade (INT): The quantity of the book being sold.
-       - _LivroID (INT): The ID of the book being sold.
+       - `_DataVenda` (DATETIME): The date and time of the sale.
+       - `_FuncionarioID` (INT): The ID of the employee handling the sale.
+       - `_ClienteID` (INT): The ID of the customer making the purchase.
+       - `_Quantidade` (INT): The quantity of the book being sold.
+       - `_LivroID` (INT): The ID of the book being sold.
    - **Purpose**:
        - Inserts a new record into the vendas table with the sale details.
        - Inserts a new record into the itens_venda table with the item details of the sale.
@@ -267,10 +267,10 @@ This stored procedure updates the details of a customer.
 
    - **Procedure Name**: ADC1
    - **Parameters**:
-       - _ID (INT): The ID of the customer to update.
-       - _Nome (VARCHAR(45)): The new name of the customer.
-       - _Email (VARCHAR(45)): The new email of the customer.
-       - _Telefone (INT): The new phone number of the customer.
+       - `_ID` (INT): The ID of the customer to update.
+       - `_Nome` (VARCHAR(45)): The new name of the customer.
+       - `_Email` (VARCHAR(45)): The new email of the customer.
+       - `_Telefone` (INT): The new phone number of the customer.
    - **Purpose**:
        - Updates the customer details in the clientes table.
    - **Behavior**:
@@ -304,8 +304,8 @@ This stored procedure calculates the total sales for a specified period.
 
    - **Procedure Name**: TVPT1
    - **Parameters**:
-       - _Data1 (DATETIME): The start date of the period.
-       - _Data2 (DATETIME): The end date of the period.
+       - `_Data1` (DATETIME): The start date of the period.
+       - `_Data2` (DATETIME): The end date of the period.
    - **Purpose**:
        - Calculates the total sales amount for the given period.
    - **Behavior**:
@@ -366,8 +366,8 @@ This stored procedure lists books sold within a specified period using a cursor.
 
    - **Procedure Name**: ListBooksSoldInPeriod
    - **Parameters**:
-       - startDate (DATETIME): The start date of the period.
-       - endDate (DATETIME): The end date of the period.
+       - `startDate` (DATETIME): The start date of the period.
+       - `endDate` (DATETIME): The end date of the period.
    - **Purpose**:
        - Retrieves and outputs the ID, title, and total quantity sold of books within the specified date range.
    - **Behavior**:
