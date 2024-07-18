@@ -145,7 +145,6 @@ Stores the relationship between books and authors.
 
 This trigger updates the stock of a book after a sale.
 
-   - **Trigger Name**: 'book_stock_after_insert'
    - **Timing**: AFTER INSERT
    - **Event**: INSERT on itens_venda
    - **Purpose**: To update the 'quantidade_em_stock' of a book in the livros table by subtracting the quantity sold from the current stock.
@@ -174,7 +173,6 @@ This trigger updates the stock of a book after a sale.
 
 This trigger prevents the insertion of a sale if there is not enough stock.
 
-   - **Trigger Name**: 'check_stock_before_insert'
    - **Timing**: BEFORE INSERT
    - **Event**: INSERT on 'itens_venda'
    - **Purpose**: To ensure there is enough stock of a book before allowing the insertion of a new sale record.
@@ -217,7 +215,6 @@ This trigger prevents the insertion of a sale if there is not enough stock.
 
 This stored procedure registers a new sale in the database.
 
-   - **Procedure Name**: RNV1
    - **Parameters**:
        - `_DataVenda` (DATETIME): The date and time of the sale.
        - `_FuncionarioID` (INT): The ID of the employee handling the sale.
@@ -265,7 +262,6 @@ This stored procedure registers a new sale in the database.
 
 This stored procedure updates the details of a customer.
 
-   - **Procedure Name**: ADC1
    - **Parameters**:
        - `_ID` (INT): The ID of the customer to update.
        - `_Nome` (VARCHAR(45)): The new name of the customer.
@@ -302,7 +298,6 @@ This stored procedure updates the details of a customer.
 
 This stored procedure calculates the total sales for a specified period.
 
-   - **Procedure Name**: TVPT1
    - **Parameters**:
        - `_Data1` (DATETIME): The start date of the period.
        - `_Data2` (DATETIME): The end date of the period.
