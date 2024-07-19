@@ -20,7 +20,7 @@
 
 ---
 
-**Setup and test the project** [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup.md)
+**Setup and test the project** [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup_and_test.md)
 
 ---
 
