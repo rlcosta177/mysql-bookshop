@@ -16,6 +16,7 @@
 4. [Triggers](#Triggers)
 5. [Stored Procedures](#stored-procedures)
 6. [Cursor](#Cursor)
+7. [Queries](#Queries)
 
 ---
 
@@ -434,9 +435,9 @@ This stored procedure lists books sold within a specified period using a cursor.
         ~~~~sql
         This call retrieves and outputs the ID, title, and total quantity sold of books within the date range from January 1, 2010, to December 31, 2024.
         ~~~~
---
+---
 
-## Selects
+## Queries
 
 ### Query 1: List Available Books with Respective Authors
 
