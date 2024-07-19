@@ -18,11 +18,6 @@
 6. [Stored Procedures](#stored-procedures)
 7. [Cursor](#Cursor)
 
-
----
-
-**Setup and test the project** [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup_and_test.md)
-
 ---
 
 # Schema Overview
@@ -30,6 +25,12 @@ The book_shop schema is designed to manage a book store's data, including inform
 ![Screenshot from 2024-07-18 08-55-09](https://github.com/user-attachments/assets/5a98e557-c722-48c5-b337-b11e96019d45)
 
 ---
+
+**Setup and test the project** [here](https://github.com/rlcosta177/mysql-bookshop/blob/main/setup_and_test.md)
+
+---
+
+
 
 ## Tables
 
