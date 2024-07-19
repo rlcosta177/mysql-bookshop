@@ -421,8 +421,7 @@ This stored procedure lists books sold within a specified period using a cursor.
             **SELECT**: Outputs the fetched details (book ID, title, total quantity sold).
             **CLOSE**: Closes the cursor after all rows have been processed.
 
-      **Error Handling**:
-            A CONTINUE HANDLER is declared to set the done flag to TRUE when the end of the cursor result set is reached.
+      **Error Handling**: A CONTINUE HANDLER is declared to set the done flag to TRUE when the end of the cursor result set is reached.
 
      ### Usage Example
 
@@ -432,9 +431,7 @@ This stored procedure lists books sold within a specified period using a cursor.
         ~~~~
 
         **Explanation**:
-        ~~~~sql
         This call retrieves and outputs the ID, title, and total quantity sold of books within the date range from January 1, 2010, to December 31, 2024.
-        ~~~~
 ---
 
 ## Queries
@@ -451,6 +448,7 @@ This query retrieves a list of available books along with their respective autho
    JOIN autores a ON la.autores_id = a.id
    WHERE l.quantidade_em_stock > 0;
    ~~~~
+
    Explanation
 
    - SELECT Clause: Selects the book ID, book title, and author name.
