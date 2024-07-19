@@ -1,16 +1,16 @@
 -- ------------------------------ 3.INSERTS ------------------------------ --
 
 INSERT INTO `book_shop`.`autores`(`nome`,`biografia`) VALUES
-('Fernando Pessoa','he a cool guy'),
-('Tony Carreira','Oh prima que rica prima, faz tudo que não te ralho.'),
+('Nuno Pessoa','ye'),
+('Tony Moura','Oh prima que rica prima, faz tudo que não te ralho.'),
 ('José Freitas','fin, fin, fin, fin, fin, josé, vroom'),
-('Jhon Cena','xio zhung che, bing chilling');
+('Viola Cena','xio zhung che, bing chilling');
 
 
 INSERT INTO `book_shop`.`clientes` (`nome`,`email`,`telefone`) VALUES
-('Leandro Lima','flamestar2003@gmail.com','916146970'),
-('Gonçalo Teófilo','gonteo@gmail.com','965120776'),
-('Fábio Silva', 'spiller2005@gmail.com', '924012899');
+('Afonso Candice','eltrucko@gmail.com','916146970'),
+('Daniel Ligma','ligma@gmail.com','965120776'),
+('Marco Sugma', 'bigchungus@gmail.com', '924012899');
 
 
 INSERT INTO `book_shop`.`posicao` (`nome`) VALUES
@@ -19,11 +19,13 @@ INSERT INTO `book_shop`.`posicao` (`nome`) VALUES
 ('Book Dealer'),
 ('Placement');
 
+
 INSERT INTO `book_shop`.`funcionarios` (`nome`,`posicao_id`,`salario`) VALUES 
-('Juver SunnyD',1,1200.97),
-('Pedro Pires',2,977.18),
-('Diogo Airlines',3,1349.56),
-('Victor Coelho',4,1108.84);
+('Gonçalo SunnyD',1,1200.97),
+('Sim Mas',2,977.18),
+('Henrique Airlines',3,1349.56),
+('Raposo Mongus',4,1108.84);
+
 
 INSERT INTO `book_shop`.`categorias` (nome) VALUES 
 ('Think Mark, Think'),
@@ -55,7 +57,6 @@ INSERT INTO `book_shop`.`itens_venda` (`quantidade`,`livros_id`,`vendas_id`,`ven
 (39,1,5,4,2),
 (20,1,5,4,2);
 
-SELECT * FROM livros;
 INSERT INTO `book_shop`.`livros_and_autores` (`livros_id`,`livros_categorias_id`,`autores_id`) VALUES
 (1,1,1),
 (2,1,2),
