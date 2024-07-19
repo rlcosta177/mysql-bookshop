@@ -1,7 +1,5 @@
 ### Import a Database
 
-   - **Open the Connection**:
-      - Double-click on your newly created connection to open it.
    - **Open the Import Wizard**:
        - Go to Server -> Data Import.
    - **Choose the Import Method**:
