@@ -444,13 +444,13 @@ This stored procedure lists books sold within a specified period using a cursor.
 This query retrieves a list of available books along with their respective authors. Only books that are currently in stock are included in the result set.
 
 ### SQL Code
-    ~~~~sql
-    SELECT la.livros_id AS `ID do Livro`, l.titulo AS `Titulo`, a.nome AS `Nome do Autor` 
-    FROM livros_and_autores la
-    JOIN livros l ON la.livros_id = l.id 
-    JOIN autores a ON la.autores_id = a.id
-    WHERE l.quantidade_em_stock > 0;
-    ~~~~
+   ~~~~sql
+   SELECT la.livros_id AS `ID do Livro`, l.titulo AS `Titulo`, a.nome AS `Nome do Autor` 
+   FROM livros_and_autores la
+   JOIN livros l ON la.livros_id = l.id 
+   JOIN autores a ON la.autores_id = a.id
+   WHERE l.quantidade_em_stock > 0;
+   ~~~~
    Explanation
 
    - SELECT Clause: Selects the book ID, book title, and author name.
@@ -469,10 +469,10 @@ This query retrieves a list of available books along with their respective autho
 This query retrieves all sales that occurred between January 1, 2012, and January 1, 2019.
 
 #### SQL Code
-    ~~~~sql
-    SELECT * FROM vendas 
-    WHERE data_venda BETWEEN '2012-01-01' AND '2019-01-01';
-    ~~~~
+   ~~~~sql
+   SELECT * FROM vendas 
+   WHERE data_venda BETWEEN '2012-01-01' AND '2019-01-01';
+   ~~~~
    Explanation
 
    - SELECT Clause: Selects all columns from the vendas table.
@@ -486,14 +486,14 @@ This query retrieves all sales that occurred between January 1, 2012, and Januar
 This query lists sales where the total value of books purchased by a customer exceeds 400.
 
 #### SQL Code 
-    ~~~~sql
-    SELECT v.id AS `ID Venda`, v.data_venda AS `Data de venda`, c.nome AS `Nome Cliente`, l.titulo AS `Livro`, (iv.quantidade * l.preco) AS `Preço Total` 
-    FROM vendas v
-    JOIN clientes c ON v.clientes_id = c.id
-    JOIN itens_venda iv ON v.id = iv.vendas_id
-    JOIN livros l ON iv.livros_id = l.id
-    WHERE l.preco * iv.quantidade > 400;
-    ~~~~
+   ~~~~sql
+   SELECT v.id AS `ID Venda`, v.data_venda AS `Data de venda`, c.nome AS `Nome Cliente`, l.titulo AS `Livro`, (iv.quantidade * l.preco) AS `Preço Total` 
+   FROM vendas v
+   JOIN clientes c ON v.clientes_id = c.id
+   JOIN itens_venda iv ON v.id = iv.vendas_id
+   JOIN livros l ON iv.livros_id = l.id
+   WHERE l.preco * iv.quantidade > 400;
+   ~~~~
    Explanation
 
    - SELECT Clause: Selects the sale ID, sale date, customer name, book title, and total price.
@@ -517,12 +517,12 @@ This query retrieves a list of books that belong to a specific category, identif
 
 #### SQL
 
-    ~~~~sql
-    SELECT l.id AS `ID`, l.titulo AS `Livro`, c.nome AS `Categoria` 
-    FROM livros l
-    JOIN categorias c ON l.categorias_id = c.id
-    WHERE c.id = 1;
-    ~~~~
+   ~~~~sql
+   SELECT l.id AS `ID`, l.titulo AS `Livro`, c.nome AS `Categoria` 
+   FROM livros l
+   JOIN categorias c ON l.categorias_id = c.id
+   WHERE c.id = 1;
+   ~~~~
 
    Explanation
 
