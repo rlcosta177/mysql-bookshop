@@ -140,7 +140,7 @@ Stores the relationship between books and authors.
 
 ---
 
-## Queries
+# Queries
 
 ### Query 1: List Available Books with Respective Authors
 
@@ -454,7 +454,7 @@ This stored procedure calculates the total sales for a specified period.
 
 ---
 
-## Cursor
+# Cursor
 
 ### Procedure: ListBooksSoldInPeriod
 
