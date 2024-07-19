@@ -1,4 +1,4 @@
-# Book Shop Database Schema Documentation
+# Book Shop Documentation
 
 ## Table of Contents
 
