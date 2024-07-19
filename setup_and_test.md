@@ -9,7 +9,8 @@
        - Choose an existing database to import the data into, or create a new database by entering a new name in the "Default Schema to be Imported To" field.
    - **Start the Import Process**:
        - Click on Start Import.
-    
+
+---
 
 ### Test the Database
 
