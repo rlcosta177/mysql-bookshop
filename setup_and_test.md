@@ -20,10 +20,8 @@
 # Lista os livros disponíveis com os respectivos autores
 SELECT la.livros_id AS `ID do Livro`, l.titulo AS `Titulo`, a.nome AS `Nome do Autor` 
 FROM livros_and_autores la
-# Inner Join three tables so that we can display the information correctly
 JOIN livros l ON la.livros_id = l.id 
 JOIN autores a ON la.autores_id = a.id
-# Only show the records where stock is higher than 0
 WHERE l.quantidade_em_stock > 0;  
 ~~~
 
