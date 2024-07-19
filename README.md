@@ -13,10 +13,11 @@
     7. [funcionarios](#funcionarios)
     8. [vendas](#vendas)
     9. [livros_and_autores](#livros_and_autores)
-4. [Triggers](#Triggers)
-5. [Stored Procedures](#stored-procedures)
-6. [Cursor](#Cursor)
-7. [Queries](#Queries)
+4. [Queries](#Queries)
+5. [Triggers](#Triggers)
+6. [Stored Procedures](#stored-procedures)
+7. [Cursor](#Cursor)
+
 
 ---
 
@@ -137,6 +138,105 @@ Stores the relationship between books and authors.
        - fk_livros_and_autores_autores1_idx on autores_id
        - fk_livros_and_autores_livros1_idx on livros_id, livros_categorias_id
 
+---
+
+## Queries
+
+### Query 1: List Available Books with Respective Authors
+
+This query retrieves a list of available books along with their respective authors. Only books that are currently in stock are included in the result set.
+
+### SQL Code
+   ~~~~sql
+   SELECT la.livros_id AS `ID do Livro`, l.titulo AS `Titulo`, a.nome AS `Nome do Autor` 
+   FROM livros_and_autores la
+   JOIN livros l ON la.livros_id = l.id 
+   JOIN autores a ON la.autores_id = a.id
+   WHERE l.quantidade_em_stock > 0;
+   ~~~~
+
+   Explanation
+
+   - SELECT Clause: Selects the book ID, book title, and author name.
+       - `la.livros_id` is aliased as ID do Livro.
+       - `l.titulo` is aliased as Titulo.
+       - `a.nome` is aliased as Nome do Autor.
+   - FROM Clause: Specifies the primary table livros_and_autores aliased as la.
+   - JOIN Clauses:
+       - Joins livros table l on the livros_id.
+       - Joins autores table a on the autores_id.
+   - WHERE Clause: Filters the results to include only books with a stock quantity greater than 0.
+
+
+### Query 2: List Sales in a Specific Period
+
+This query retrieves all sales that occurred between January 1, 2012, and January 1, 2019.
+
+#### SQL Code
+   ~~~~sql
+   SELECT * FROM vendas 
+   WHERE data_venda BETWEEN '2012-01-01' AND '2019-01-01';
+   ~~~~
+   Explanation
+
+   - SELECT Clause: Selects all columns from the vendas table.
+   - FROM Clause: Specifies the table vendas.
+   - WHERE Clause: Filters the results to include only sales made between the specified dates.
+
+---
+
+### Query 3: List Customers Who Spent More Than a Specified Amount
+
+This query lists sales where the total value of books purchased by a customer exceeds 400.
+
+#### SQL Code 
+   ~~~~sql
+   SELECT v.id AS `ID Venda`, v.data_venda AS `Data de venda`, c.nome AS `Nome Cliente`, l.titulo AS `Livro`, (iv.quantidade * l.preco) AS `Preço Total` 
+   FROM vendas v
+   JOIN clientes c ON v.clientes_id = c.id
+   JOIN itens_venda iv ON v.id = iv.vendas_id
+   JOIN livros l ON iv.livros_id = l.id
+   WHERE l.preco * iv.quantidade > 400;
+   ~~~~
+   Explanation
+
+   - SELECT Clause: Selects the sale ID, sale date, customer name, book title, and total price.
+       - `v.id` is aliased as ID Venda.
+       - `v.data_venda` is aliased as Data de venda.
+       - `c.nome` is aliased as Nome Cliente.
+       - `l.titulo` is aliased as Livro.
+       - `(iv.quantidade * l.preco)` is aliased as Preço Total.
+   - FROM Clause: Specifies the primary table vendas aliased as v.
+   - JOIN Clauses:
+       - Joins clientes table c on the clientes_id.
+       - Joins itens_venda table iv on the vendas_id.
+       - Joins livros table l on the livros_id.
+   - WHERE Clause: Filters the results to include only sales where the total price exceeds 400.
+
+---
+
+### Query 4: List Books in a Specific Category
+
+This query retrieves a list of books that belong to a specific category, identified by category ID 1.
+
+#### SQL
+
+   ~~~~sql
+   SELECT l.id AS `ID`, l.titulo AS `Livro`, c.nome AS `Categoria` 
+   FROM livros l
+   JOIN categorias c ON l.categorias_id = c.id
+   WHERE c.id = 1;
+   ~~~~
+
+   Explanation
+
+   - SELECT Clause: Selects the book ID, book title, and category name.
+       - `l.id` is aliased as ID.
+       - `l.titulo` is aliased as Livro.
+       - `c.nome` is aliased as Categoria.
+   - FROM Clause: Specifies the primary table livros aliased as l.
+   - JOIN Clause: Joins categorias table c on the categorias_id.
+   - WHERE Clause: Filters the results to include only books in the category with ID 1. 
 
 ---
 
@@ -432,102 +532,3 @@ This stored procedure lists books sold within a specified period using a cursor.
 
         **Explanation**:
         This call retrieves and outputs the ID, title, and total quantity sold of books within the date range from January 1, 2010, to December 31, 2024.
----
-
-## Queries
-
-### Query 1: List Available Books with Respective Authors
-
-This query retrieves a list of available books along with their respective authors. Only books that are currently in stock are included in the result set.
-
-### SQL Code
-   ~~~~sql
-   SELECT la.livros_id AS `ID do Livro`, l.titulo AS `Titulo`, a.nome AS `Nome do Autor` 
-   FROM livros_and_autores la
-   JOIN livros l ON la.livros_id = l.id 
-   JOIN autores a ON la.autores_id = a.id
-   WHERE l.quantidade_em_stock > 0;
-   ~~~~
-
-   Explanation
-
-   - SELECT Clause: Selects the book ID, book title, and author name.
-       - `la.livros_id` is aliased as ID do Livro.
-       - `l.titulo` is aliased as Titulo.
-       - `a.nome` is aliased as Nome do Autor.
-   - FROM Clause: Specifies the primary table livros_and_autores aliased as la.
-   - JOIN Clauses:
-       - Joins livros table l on the livros_id.
-       - Joins autores table a on the autores_id.
-   - WHERE Clause: Filters the results to include only books with a stock quantity greater than 0.
-
-
-### Query 2: List Sales in a Specific Period
-
-This query retrieves all sales that occurred between January 1, 2012, and January 1, 2019.
-
-#### SQL Code
-   ~~~~sql
-   SELECT * FROM vendas 
-   WHERE data_venda BETWEEN '2012-01-01' AND '2019-01-01';
-   ~~~~
-   Explanation
-
-   - SELECT Clause: Selects all columns from the vendas table.
-   - FROM Clause: Specifies the table vendas.
-   - WHERE Clause: Filters the results to include only sales made between the specified dates.
-
----
-
-### Query 3: List Customers Who Spent More Than a Specified Amount
-
-This query lists sales where the total value of books purchased by a customer exceeds 400.
-
-#### SQL Code 
-   ~~~~sql
-   SELECT v.id AS `ID Venda`, v.data_venda AS `Data de venda`, c.nome AS `Nome Cliente`, l.titulo AS `Livro`, (iv.quantidade * l.preco) AS `Preço Total` 
-   FROM vendas v
-   JOIN clientes c ON v.clientes_id = c.id
-   JOIN itens_venda iv ON v.id = iv.vendas_id
-   JOIN livros l ON iv.livros_id = l.id
-   WHERE l.preco * iv.quantidade > 400;
-   ~~~~
-   Explanation
-
-   - SELECT Clause: Selects the sale ID, sale date, customer name, book title, and total price.
-       - `v.id` is aliased as ID Venda.
-       - `v.data_venda` is aliased as Data de venda.
-       - `c.nome` is aliased as Nome Cliente.
-       - `l.titulo` is aliased as Livro.
-       - `(iv.quantidade * l.preco)` is aliased as Preço Total.
-   - FROM Clause: Specifies the primary table vendas aliased as v.
-   - JOIN Clauses:
-       - Joins clientes table c on the clientes_id.
-       - Joins itens_venda table iv on the vendas_id.
-       - Joins livros table l on the livros_id.
-   - WHERE Clause: Filters the results to include only sales where the total price exceeds 400.
-
----
-
-### Query 4: List Books in a Specific Category
-
-This query retrieves a list of books that belong to a specific category, identified by category ID 1.
-
-#### SQL
-
-   ~~~~sql
-   SELECT l.id AS `ID`, l.titulo AS `Livro`, c.nome AS `Categoria` 
-   FROM livros l
-   JOIN categorias c ON l.categorias_id = c.id
-   WHERE c.id = 1;
-   ~~~~
-
-   Explanation
-
-   - SELECT Clause: Selects the book ID, book title, and category name.
-       - `l.id` is aliased as ID.
-       - `l.titulo` is aliased as Livro.
-       - `c.nome` is aliased as Categoria.
-   - FROM Clause: Specifies the primary table livros aliased as l.
-   - JOIN Clause: Joins categorias table c on the categorias_id.
-   - WHERE Clause: Filters the results to include only books in the category with ID 1. 
