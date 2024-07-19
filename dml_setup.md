@@ -1,5 +1,5 @@
 -- ------------------------------ 2.CRIAÇÃO DA DATABASE ------------------------------ --
-
+~~~~sql
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -169,12 +169,13 @@ CREATE TABLE IF NOT EXISTS `book_shop`.`livros_and_autores` (
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
+~~~~
 
 ---
 
 -- ------------------------------ 5.TRIGGERS------------------------------ --
 
+~~~~sql
 # Atualizar a quantidade em stock de um livro após uma venda
 DROP TRIGGER IF EXISTS stock_update_after_insert;
 
@@ -334,13 +335,14 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-
+~~~~
 
 --- 
 
 
 -- ------------------------------ 6.STORED_PROCEDURES------------------------------ --
 
+~~~~sql
 SET GLOBAL log_bin_trust_function_creators = 1;
 
 ### Registar uma nova venda ###
@@ -414,13 +416,13 @@ BEGIN
     WHERE v.data_venda BETWEEN _Data1 AND _Data2;
 END //
 DELIMITER ;
-
+~~~~
 
 ---
 
 -- ------------------------------ 7.CRUSORES ------------------------------ --
 
-
+~~~~sql
 ### Listar livros vendidos dentro de um periodo de tempo ###
 -- The procedure takes in a startDate and endDate, and selects all the books in between the two dates
 -- Joins were used in the select to be able to use the date, as well as the quantity
@@ -458,12 +460,13 @@ BEGIN
   CLOSE book_cursor;
 END //
 DELIMITER ;
-
+~~~~
 
 ---
 
 -- ------------------------------ 3.INSERTS ------------------------------ --
 
+~~~~sql
 INSERT INTO `book_shop`.`autores`(`nome`,`biografia`) VALUES
 ('Jack Daniels','ye'),
 ('Tony Moura','Oh prima que rica prima, faz tudo que não te ralho.'),
@@ -527,3 +530,4 @@ INSERT INTO `book_shop`.`livros_and_autores` (`livros_id`,`livros_categorias_id`
 (3,2,3),
 (4,3,4),
 (3,2,2)
+~~~~
